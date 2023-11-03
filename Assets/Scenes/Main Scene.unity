@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.25
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 984039097}
-  m_IndirectSpecularColor: {r: 0.03222391, g: 0.03915252, b: 0.05286974, a: 0.25}
+  m_IndirectSpecularColor: {r: 0.03224317, g: 0.039156646, b: 0.052861705, a: 0.25}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2100,6 +2100,10 @@ PrefabInstance:
       propertyPath: antPrefab
       value: 
       objectReference: {fileID: 1006988486051157077, guid: 8bbdd1f02e2d4c24fb116187e612f1a5, type: 3}
+    - target: {fileID: 6920783053086708782, guid: 47f61d35f919ad54f928dc9aa77c6d8b, type: 3}
+      propertyPath: spawnInterval
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6920783053086708783, guid: 47f61d35f919ad54f928dc9aa77c6d8b, type: 3}
       propertyPath: m_RootOrder
       value: 1
