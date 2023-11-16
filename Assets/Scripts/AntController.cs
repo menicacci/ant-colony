@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AntController : MonoBehaviour
 {
     public Transform holdSpot;
+
+    public LayerMask tanaMask;
     public LayerMask pickUpMask;
+    public LayerMask homeMask;
+    public LayerMask foodMask;
+
+    public ParticleSystem foodPheromone;
+    public ParticleSystem homePheromone;
 
     public float moveSpeed;
     public float rotationSpeed;
@@ -19,20 +27,33 @@ public class AntController : MonoBehaviour
     private bool hasFood = false;
     private Transform targetFood;
     
+    private float timer = 0f;
     private float changeDirectionTimer;
+    public float antLifetime = 60f;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         changeDirectionTimer = Random.Range(2.0f, 5.0f);
     
+        ActivatePheromoneSystem();
+        UpdatePheromoneSystem();
         RandomDirection();
     }
 
     private void Update()
     {
+        ParticleSystem pheromone = hasFood ? foodPheromone : homePheromone;
+
         // Update timer
         changeDirectionTimer -= Time.deltaTime;
+        antLifetime -= Time.deltaTime;
+        timer += Time.deltaTime;
+
+        if (antLifetime <= 0)
+        {
+            Death();
+        }
 
         if (!hasFood) 
         {
@@ -44,6 +65,10 @@ public class AntController : MonoBehaviour
             {
                 PickUpFood();
             }
+        }
+        else
+        {
+            ReturnHome();
         }
 
         if (changeDirectionTimer <= 0)
@@ -58,19 +83,35 @@ public class AntController : MonoBehaviour
 
     private void LookForFood() 
     {      
-        Collider[] targetedFood = findFood(perceptionRadius);
+        Collider[] targetedFood = Find(pickUpMask, perceptionRadius);
+        if (targetedFood.Length > 0) 
+        {
+            targetFood = targetedFood[Random.Range(0, targetedFood.Length)].transform;
+            targetDirection = (targetFood.position - transform.position).normalized;
+            changeDirectionTimer = 7.5f;
 
-            if (targetedFood.Length > 0) 
-            {
-                targetFood = targetedFood[Random.Range(0, targetedFood.Length)].transform;
-                targetDirection = (targetFood.position - transform.position).normalized;
-                changeDirectionTimer = 5f;
-            }
+            // Debug.Log("Food found");
+        }
+        else
+        {
+            FollowTrails(foodMask);            
+        }
+
+    }
+
+    private void FollowTrails(LayerMask layer)
+    {
+        Collider[] pheromoneTrails = Find(layer, perceptionRadius);
+
+        if (pheromoneTrails.Length > 0)
+        {
+            Debug.Log("Trails found");
+        }
     }
 
     private void PickUpFood()
     {
-        Collider[] pickedUpFood = findFood(foodRadius);
+        Collider[] pickedUpFood = Find(pickUpMask, foodRadius);
 
         if (pickedUpFood.Length > 0) 
         {
@@ -82,13 +123,53 @@ public class AntController : MonoBehaviour
             food.layer = LayerMask.NameToLayer("GoingHome");
             hasFood = true;
 
+            changeDirectionTimer = 0;
+            UpdatePheromoneSystem();
             ReturnHome();
         }
     }
 
     // TODO: Logic for returning home
-    private void ReturnHome() {
-        RandomDirection();
+    private void ReturnHome() 
+    {        
+        if (changeDirectionTimer <= 0)
+        {
+            // FollowTrails(homeMask);
+            Collider[] home = Find(tanaMask, 1000);
+            if (home.Length > 0) 
+            {
+                targetDirection = (home[0].transform.position - transform.position).normalized;
+                changeDirectionTimer = Random.Range(0f, 6.0f);
+
+                // Debug.Log("Home found");
+            }
+        }
+        else
+        {
+            Collider[] home = Find(tanaMask, foodRadius);
+
+            if (home.Length > 0) 
+            {
+                DropOffFood();
+            }
+        }
+    }
+
+    // TODO: Handle ants' death
+    private void Death() 
+    {
+        // Debug.Log("Time finished");
+    }
+
+    private void DropOffFood()
+    {
+        Destroy(food);
+        hasFood = false;
+        targetFood = null;
+        changeDirectionTimer = 0;
+
+        UpdatePheromoneSystem();
+        LookForFood();
     }
 
     private void RandomDirection()
@@ -103,7 +184,8 @@ public class AntController : MonoBehaviour
         targetFood = null;
     }
 
-    private void Rotate() {
+    private void Rotate() 
+    {
         if (targetDirection != Vector3.zero) 
         {
             // Rotate towards the current movement direction
@@ -112,8 +194,25 @@ public class AntController : MonoBehaviour
         }
     }
 
-    private Collider[] findFood(float radius) 
+    private Collider[] Find(LayerMask mask, float radius)
     {
-        return Physics.OverlapSphere(transform.position + targetDirection, radius, pickUpMask);
+        return Physics.OverlapSphere(transform.position + targetDirection, radius, mask);
+    }
+
+    private void ActivatePheromoneSystem()
+    {
+        foodPheromone.gameObject.SetActive(true);
+        homePheromone.gameObject.SetActive(true);
+    }
+
+    private void UpdatePheromoneSystem()
+    {
+        timer = 0;
+        
+        ParticleSystem pheromoneToEmit = hasFood ? foodPheromone : homePheromone;
+        ParticleSystem pheromoneToStop = !hasFood ? foodPheromone : homePheromone;
+
+        pheromoneToEmit.Play();
+        pheromoneToStop.Stop();
     }
 }
