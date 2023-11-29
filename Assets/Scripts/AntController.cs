@@ -11,6 +11,7 @@ public class AntController : MonoBehaviour
     public LayerMask pickUpMask;
     public LayerMask homeMask;
     public LayerMask foodMask;
+    public LayerMask antMask;
 
     public ParticleSystem foodPheromone;
     public ParticleSystem homePheromone;
@@ -31,11 +32,14 @@ public class AntController : MonoBehaviour
     private float changeDirectionTimer;
     public float antLifetime = 60f;
 
+    public GameObject pheromoneDetector;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         changeDirectionTimer = Random.Range(2.0f, 5.0f);
-    
+
+
         ActivatePheromoneSystem();
         UpdatePheromoneSystem();
         RandomDirection();
@@ -94,19 +98,104 @@ public class AntController : MonoBehaviour
         }
         else
         {
-            FollowTrails(foodMask);            
+            if (changeDirectionTimer <= 0)
+            {
+                FollowTrails(true);
+            }            
         }
 
     }
 
-    private void FollowTrails(LayerMask layer)
+    private class ParticleInfo
     {
-        Collider[] pheromoneTrails = Find(layer, perceptionRadius);
+        public Vector3 position;
+        public float remainingLifetime;
 
-        if (pheromoneTrails.Length > 0)
+        public ParticleInfo(Vector3 pos, float lifetime)
         {
-            Debug.Log("Trails found");
+            position = pos;
+            remainingLifetime = lifetime;
         }
+    }
+
+    private void FollowTrails(bool isSearching)
+    {
+       Collider[] nearByAnts = Find(antMask, perceptionRadius);
+
+       if (nearByAnts.Length > 0)
+       {
+               List<ParticleSystem> particleSystem = FilterParticles(nearByAnts, isSearching);
+              
+               if (particleSystem.Count > 0)
+               {
+                      List<ParticleInfo> pheromoneDetected = FindBestParticles(particleSystem);
+
+                      if (pheromoneDetected.Count > 0)
+                      {
+                            Vector3 position = GetTargetPosition(pheromoneDetected);
+
+                            targetDirection = (position - transform.position).normalized;
+                            changeDirectionTimer = 2f;
+                      }
+               }            
+       }
+    }
+
+    private List<ParticleSystem> FilterParticles(Collider[] ants, bool isSearching)
+    {
+        List<ParticleSystem> particlesFound = new List<ParticleSystem>();
+    
+        int pheromoneSystem = isSearching ? 0 : 1;
+        foreach (Collider ant in ants)
+        {
+            ParticleSystem[] particles = ant.gameObject.GetComponentsInChildren<ParticleSystem>();
+    
+            if (particles != null && particles.Length == 2 && particles[pheromoneSystem].isEmitting)
+            {
+                particlesFound.Add(particles[pheromoneSystem]);
+            }
+        }
+    
+        return particlesFound;
+    }
+
+    private List<ParticleInfo> FindBestParticles(List<ParticleSystem> particleSystem)
+    {
+        List<ParticleInfo> pheromoneDetected = new List<ParticleInfo>();
+
+        foreach (ParticleSystem ps in particleSystem)
+        {                            
+              // Get the particles from the particle system
+              ParticleSystem.Particle[] particles = new ParticleSystem.Particle[ps.particleCount];
+
+              int numParticlesAlive = ps.GetParticles(particles);
+
+              for (int i = 0; i < Mathf.Min(numParticlesAlive, 20); i++)
+              {
+                  // Accessing position information
+                  Vector3 particlePosition = particles[i].position;
+                  float particleLifetime = particles[i].remainingLifetime;
+
+                  pheromoneDetected.Add(new ParticleInfo(particlePosition, particleLifetime));
+              }
+        }
+
+        return pheromoneDetected;
+    }
+
+    private Vector3 GetTargetPosition(List<ParticleInfo> pheromoneDetected)
+    {
+        float totalWeight = 0.0f;
+        Vector3 weightedSum = Vector3.zero;
+
+        foreach (ParticleInfo particle in pheromoneDetected)
+        {
+            float weight = 1.0f / (particle.remainingLifetime + 1.0f); // Adding 1 to avoid division by zero
+            weightedSum += particle.position * weight;
+            totalWeight += weight;
+        }
+
+        return weightedSum / totalWeight;
     }
 
     private void PickUpFood()
@@ -133,16 +222,17 @@ public class AntController : MonoBehaviour
     private void ReturnHome() 
     {        
         if (changeDirectionTimer <= 0)
-        {
-            // FollowTrails(homeMask);
-            Collider[] home = Find(tanaMask, 1000);
+        {           
+            Collider[] home = Find(tanaMask, perceptionRadius);
             if (home.Length > 0) 
             {
                 targetDirection = (home[0].transform.position - transform.position).normalized;
-                changeDirectionTimer = Random.Range(0f, 6.0f);
-
-                // Debug.Log("Home found");
+                changeDirectionTimer = Random.Range(0f, 2.0f);
             }
+            else {
+                FollowTrails(false);
+            }
+            
         }
         else
         {
