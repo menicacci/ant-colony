@@ -211,7 +211,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &6398245302402683792
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -276,13 +276,12 @@ MonoBehaviour:
     m_Bits: 2048
   foodPheromone: {fileID: 9151055891329625065}
   homePheromone: {fileID: 6976018852945429854}
-  moveSpeed: 8
-  rotationSpeed: 120
+  moveSpeed: 5
+  rotationSpeed: 100
   collisionRadius: 0.8
   perceptionRadius: 150
   foodRadius: 2
   antLifetime: 120
-  pheromoneDetector: {fileID: 0}
 --- !u!1 &1086531069829984439
 GameObject:
   m_ObjectHideFlags: 0

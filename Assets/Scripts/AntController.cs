@@ -32,8 +32,6 @@ public class AntController : MonoBehaviour
     private float changeDirectionTimer;
     public float antLifetime = 60f;
 
-    public GameObject pheromoneDetector;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -92,9 +90,7 @@ public class AntController : MonoBehaviour
         {
             targetFood = targetedFood[Random.Range(0, targetedFood.Length)].transform;
             targetDirection = (targetFood.position - transform.position).normalized;
-            changeDirectionTimer = 7.5f;
-
-            // Debug.Log("Food found");
+            changeDirectionTimer = Random.Range(6.5f, 7.5f);
         }
         else
         {
@@ -106,96 +102,20 @@ public class AntController : MonoBehaviour
 
     }
 
-    private class ParticleInfo
-    {
-        public Vector3 position;
-        public float remainingLifetime;
-
-        public ParticleInfo(Vector3 pos, float lifetime)
-        {
-            position = pos;
-            remainingLifetime = lifetime;
-        }
-    }
-
     private void FollowTrails(bool isSearching)
     {
        Collider[] nearByAnts = Find(antMask, perceptionRadius);
 
        if (nearByAnts.Length > 0)
-       {
-               List<ParticleSystem> particleSystem = FilterParticles(nearByAnts, isSearching);
-              
-               if (particleSystem.Count > 0)
+       {              
+               Vector3 position = AntUtils.Instance.GetTargetPosition(nearByAnts, isSearching);
+
+               if (position != Vector3.zero)
                {
-                      List<ParticleInfo> pheromoneDetected = FindBestParticles(particleSystem);
-
-                      if (pheromoneDetected.Count > 0)
-                      {
-                            Vector3 position = GetTargetPosition(pheromoneDetected);
-
-                            targetDirection = (position - transform.position).normalized;
-                            changeDirectionTimer = 2f;
-                      }
-               }            
+                      targetDirection = (position - transform.position).normalized;
+                      changeDirectionTimer = Random.Range(0.5f, 2.0f);
+               }
        }
-    }
-
-    private List<ParticleSystem> FilterParticles(Collider[] ants, bool isSearching)
-    {
-        List<ParticleSystem> particlesFound = new List<ParticleSystem>();
-    
-        int pheromoneSystem = isSearching ? 0 : 1;
-        foreach (Collider ant in ants)
-        {
-            ParticleSystem[] particles = ant.gameObject.GetComponentsInChildren<ParticleSystem>();
-    
-            if (particles != null && particles.Length == 2 && particles[pheromoneSystem].isEmitting)
-            {
-                particlesFound.Add(particles[pheromoneSystem]);
-            }
-        }
-    
-        return particlesFound;
-    }
-
-    private List<ParticleInfo> FindBestParticles(List<ParticleSystem> particleSystem)
-    {
-        List<ParticleInfo> pheromoneDetected = new List<ParticleInfo>();
-
-        foreach (ParticleSystem ps in particleSystem)
-        {                            
-              // Get the particles from the particle system
-              ParticleSystem.Particle[] particles = new ParticleSystem.Particle[ps.particleCount];
-
-              int numParticlesAlive = ps.GetParticles(particles);
-
-              for (int i = 0; i < Mathf.Min(numParticlesAlive, 20); i++)
-              {
-                  // Accessing position information
-                  Vector3 particlePosition = particles[i].position;
-                  float particleLifetime = particles[i].remainingLifetime;
-
-                  pheromoneDetected.Add(new ParticleInfo(particlePosition, particleLifetime));
-              }
-        }
-
-        return pheromoneDetected;
-    }
-
-    private Vector3 GetTargetPosition(List<ParticleInfo> pheromoneDetected)
-    {
-        float totalWeight = 0.0f;
-        Vector3 weightedSum = Vector3.zero;
-
-        foreach (ParticleInfo particle in pheromoneDetected)
-        {
-            float weight = 1.0f / (particle.remainingLifetime + 1.0f); // Adding 1 to avoid division by zero
-            weightedSum += particle.position * weight;
-            totalWeight += weight;
-        }
-
-        return weightedSum / totalWeight;
     }
 
     private void PickUpFood()
@@ -209,7 +129,7 @@ public class AntController : MonoBehaviour
             food.transform.parent = transform;
             food.GetComponent<Rigidbody>().isKinematic = true;
 
-            food.layer = LayerMask.NameToLayer("GoingHome");
+            food.layer = LayerMask.NameToLayer("Ant");
             hasFood = true;
 
             changeDirectionTimer = 0;
@@ -218,7 +138,6 @@ public class AntController : MonoBehaviour
         }
     }
 
-    // TODO: Logic for returning home
     private void ReturnHome() 
     {        
         if (changeDirectionTimer <= 0)
