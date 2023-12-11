@@ -187,7 +187,7 @@ Transform:
   m_GameObject: {fileID: 1006988486051157077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2726231117043157562}
@@ -204,7 +204,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006988486051157077}
   serializedVersion: 2
-  m_Mass: 1000
+  m_Mass: 1
   m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 1
@@ -277,7 +277,7 @@ MonoBehaviour:
   foodPheromone: {fileID: 9151055891329625065}
   homePheromone: {fileID: 6976018852945429854}
   moveSpeed: 8
-  rotationSpeed: 150
+  rotationSpeed: 120
   collisionRadius: 0.8
   perceptionRadius: 150
   foodRadius: 2
@@ -566,7 +566,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2744519553432299894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.07, y: 1.26, z: 1.25}
+  m_LocalPosition: {x: -0.8772758, y: 1.3067752, z: -2.6898441}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6158,7 +6158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7686186920659313427}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.95, y: 0.767, z: 1.54}
+  m_LocalPosition: {x: -1.0597662, y: 1.3067753, z: -2.652235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
