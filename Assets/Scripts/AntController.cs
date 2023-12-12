@@ -32,21 +32,24 @@ public class AntController : MonoBehaviour
     private float changeDirectionTimer;
     public float antLifetime = 60f;
 
+    private AntSpawner anthill;
+
+    public void Initialize(AntSpawner antSpawner)
+    {
+        anthill = antSpawner;
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        changeDirectionTimer = Random.Range(2.0f, 5.0f);
-
 
         ActivatePheromoneSystem();
         UpdatePheromoneSystem();
-        RandomDirection();
+        changeDirectionTimer = Random.Range(0.0f, 0.5f);
     }
 
     private void Update()
     {
-        ParticleSystem pheromone = hasFood ? foodPheromone : homePheromone;
-
         // Update timer
         changeDirectionTimer -= Time.deltaTime;
         antLifetime -= Time.deltaTime;
@@ -176,6 +179,8 @@ public class AntController : MonoBehaviour
         hasFood = false;
         targetFood = null;
         changeDirectionTimer = 0;
+
+        anthill.IncrementFood();
 
         UpdatePheromoneSystem();
         LookForFood();

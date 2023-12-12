@@ -8,6 +8,8 @@ public class AntSpawner : MonoBehaviour
     public int numberOfAnts = 100;
     public float spawnInterval = 1.0f;
 
+    private int foodFound = 0;
+
     private void Start() 
     {
         InvokeRepeating("SpawnAnts", 0f, spawnInterval);
@@ -17,8 +19,12 @@ public class AntSpawner : MonoBehaviour
     {
         if (numberOfAnts > 0)
         {
-            GameObject ant = Instantiate(antPrefab, transform.position, Quaternion.identity);
-            ant.transform.parent = transform;
+            GameObject antObject = Instantiate(antPrefab, transform.position, Quaternion.identity);
+            antObject.transform.parent = transform;
+
+            AntController ant = antObject.GetComponent<AntController>();
+            ant.Initialize(this);
+
             numberOfAnts--;
         }
         else
@@ -26,6 +32,12 @@ public class AntSpawner : MonoBehaviour
             // Stop spawning once all ants are created.
             CancelInvoke("SpawnAnts");
         }
+    }
+
+    public void IncrementFood()
+    {
+        foodFound++;
+        Debug.Log(foodFound);
     }
 
 }
