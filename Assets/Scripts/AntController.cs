@@ -108,6 +108,12 @@ public class AntController : MonoBehaviour
     private void FollowTrails(bool isSearching)
     {
        Collider[] nearByAnts = Find(antMask, perceptionRadius);
+       Collider thisCollider = GetComponent<Collider>();
+       
+       if (thisCollider != null && !nearByAnts.Contains(thisCollider))
+       {
+           nearByAnts = nearByAnts.Concat(new Collider[] { thisCollider }).ToArray();
+       }
 
        if (nearByAnts.Length > 0)
        {              
