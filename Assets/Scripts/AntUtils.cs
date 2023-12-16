@@ -38,9 +38,9 @@ public class AntUtils : MonoBehaviour
     }
 
 
-    public Vector3 GetTargetPosition(Collider[] ants, bool isSearching)
+    public Vector3 GetTargetPosition(Collider[] ants, bool isSearching, AntSpawner anthill)
     {
-        List<ParticleSystem> particleSystem = FilterParticles(ants, isSearching);
+        List<ParticleSystem> particleSystem = FilterParticles(ants, isSearching, anthill);
         List<ParticleInfo> pheromoneDetected = FindBestParticles(particleSystem);
 
         return pheromoneDetected.Count > 0 ? GetTargetPosition(pheromoneDetected) : Vector3.zero;
@@ -87,18 +87,22 @@ public class AntUtils : MonoBehaviour
         return weightedSum / totalWeight;
     }
 
-    private List<ParticleSystem> FilterParticles(Collider[] ants, bool isSearching)
+    private List<ParticleSystem> FilterParticles(Collider[] ants, bool isSearching, AntSpawner anthill)
     {
         List<ParticleSystem> particlesFound = new List<ParticleSystem>();
     
         int pheromoneSystem = isSearching ? 0 : 1;
-        foreach (Collider ant in ants)
+        foreach (Collider antCollider in ants)
         {
-            ParticleSystem[] particles = ant.gameObject.GetComponentsInChildren<ParticleSystem>();
-    
-            if (particles != null && particles.Length == 2 && particles[pheromoneSystem].isEmitting)
+            AntController ant = antCollider.gameObject.GetComponent<AntController>();
+            if (ant != null && ant.GetAntHill() == anthill)
             {
-                particlesFound.Add(particles[pheromoneSystem]);
+                ParticleSystem[] particles = antCollider.gameObject.GetComponentsInChildren<ParticleSystem>();
+
+                if (particles != null && particles.Length == 2 && particles[pheromoneSystem].isEmitting)
+                {
+                    particlesFound.Add(particles[pheromoneSystem]);
+                }
             }
         }
     

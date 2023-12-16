@@ -117,7 +117,7 @@ public class AntController : MonoBehaviour
 
        if (nearByAnts.Length > 0)
        {              
-               Vector3 position = AntUtils.Instance.GetTargetPosition(nearByAnts, isSearching);
+               Vector3 position = AntUtils.Instance.GetTargetPosition(nearByAnts, isSearching, anthill);
 
                if (position != Vector3.zero)
                {
@@ -151,16 +151,12 @@ public class AntController : MonoBehaviour
     {        
         if (changeDirectionTimer <= 0)
         {           
-            Collider[] home = Find(tanaMask, perceptionRadius);
-            if (home.Length > 0) 
-            {
-                targetDirection = (home[0].transform.position - transform.position).normalized;
-                changeDirectionTimer = Random.Range(0f, 2.0f);
-            }
-            else {
-                FollowTrails(false);
-            }
-            
+            FindHome();
+        }
+
+        if (changeDirectionTimer <= 0)
+        {
+            FollowTrails(false);
         }
         else
         {
@@ -169,6 +165,29 @@ public class AntController : MonoBehaviour
             if (home.Length > 0) 
             {
                 DropOffFood();
+            }
+        }   
+    }
+
+    private void FindHome()
+    {
+        Collider[] homes = Find(tanaMask, perceptionRadius);
+
+        if (homes.Length > 0) 
+        {
+            foreach (Collider homeCollider in homes)
+            {
+                AntSpawner antSpawner = homeCollider.gameObject.GetComponent<AntSpawner>();
+                if (antSpawner != null)
+                {
+                    if (antSpawner == anthill)
+                    {
+                        targetDirection = (homeCollider.transform.position - transform.position).normalized;
+                        changeDirectionTimer = Random.Range(3.0f, 6.0f);
+                        
+                        break;
+                    }
+                }
             }
         }
     }
@@ -234,5 +253,10 @@ public class AntController : MonoBehaviour
 
         pheromoneToEmit.Play();
         pheromoneToStop.Stop();
+    }
+
+    public AntSpawner GetAntHill()
+    {
+        return anthill;
     }
 }
