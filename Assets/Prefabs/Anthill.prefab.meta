@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: d347b7faef9c731449251f33c2d9134c
+labels:
+- cave
+- cliff
+- dirt
+- prefabs
+- rockgrass
+- rocks
+- smalldetails
+- stones
+timeCreated: 1493470242
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: prefabs
+  assetBundleVariant: 
