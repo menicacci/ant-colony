@@ -13160,7 +13160,23 @@ PrefabInstance:
     - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: antPrefab
       value: 
-      objectReference: {fileID: 1006988486051157077, guid: 91569a6374af18642b45103f57691f1a, type: 3}
+      objectReference: {fileID: 1006988486051157077, guid: 289dde561ae021a46829d453adb1d2ba, type: 3}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: initialAnts
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: numberOfAnts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: spawnInterval
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: foodSpawnRatio
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1667340653171897228, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: antPrefab
       value: 
@@ -13419,7 +13435,23 @@ PrefabInstance:
     - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: antPrefab
       value: 
-      objectReference: {fileID: 1006988486051157077, guid: 3a07418f1bdc1bb4eaf8bc4c01c14819, type: 3}
+      objectReference: {fileID: 1006988486051157077, guid: e641ef3f428d519469bbdfc71a0ed1c6, type: 3}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: initialAnts
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: numberOfAnts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: spawnInterval
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: foodSpawnRatio
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1667340653171897228, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: antPrefab
       value: 
@@ -21360,6 +21392,22 @@ PrefabInstance:
       propertyPath: antPrefab
       value: 
       objectReference: {fileID: 1006988486051157077, guid: 3a07418f1bdc1bb4eaf8bc4c01c14819, type: 3}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: initialAnts
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: numberOfAnts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: spawnInterval
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: foodSpawnRatio
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1667340653171897228, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: antPrefab
       value: 

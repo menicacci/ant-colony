@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 482547193925635823}
   - component: {fileID: -5707336606362543348}
   - component: {fileID: 6398245302402683792}
-  - component: {fileID: -3614368122061961137}
+  - component: {fileID: 5223986604936860347}
   - component: {fileID: 6929579727855453783}
   m_Layer: 11
   m_Name: Ant_Red
@@ -225,7 +225,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0870879, y: 0.48050737, z: 1.3713932}
   m_Center: {x: -0.029067636, y: 0.2597463, z: -0.1856966}
---- !u!95 &-3614368122061961137
+--- !u!95 &5223986604936860347
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -234,8 +234,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006988486051157077}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: c76e1dd902d7cfe488a45d500f98d871, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7771993403118544eb059b92764b12f1, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2fcbf08ce943ad9459882e5b6f2b6493, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -279,9 +279,9 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 100
   collisionRadius: 0.8
-  perceptionRadius: 150
+  perceptionRadius: 120
   foodRadius: 2
-  antLifetime: 120
+  antLifetime: 90
 --- !u!1 &1086531069829984439
 GameObject:
   m_ObjectHideFlags: 0

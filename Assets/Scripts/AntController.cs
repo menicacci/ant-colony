@@ -7,6 +7,8 @@ public class AntController : MonoBehaviour
 {
     public Transform holdSpot;
 
+    
+
     public LayerMask tanaMask;
     public LayerMask pickUpMask;
     public LayerMask homeMask;
@@ -27,16 +29,19 @@ public class AntController : MonoBehaviour
     private GameObject food;
     private bool hasFood = false;
     private Transform targetFood;
+    private bool dead = false;
     
     private float timer = 0f;
     private float changeDirectionTimer;
-    public float antLifetime = 60f;
+    public float antLifetime = 90f;
 
     private AntSpawner anthill;
+    private Animator animator;
 
     public void Initialize(AntSpawner antSpawner)
     {
         anthill = antSpawner;
+        anthill.AddAnt();
     }
 
     private void Start()
@@ -46,6 +51,9 @@ public class AntController : MonoBehaviour
         ActivatePheromoneSystem();
         UpdatePheromoneSystem();
         changeDirectionTimer = Random.Range(0.0f, 0.5f);
+        antLifetime += Random.Range(0f, 30f);
+
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -55,35 +63,37 @@ public class AntController : MonoBehaviour
         antLifetime -= Time.deltaTime;
         timer += Time.deltaTime;
 
-        if (antLifetime <= 0)
+        if (antLifetime <= 0 && !dead)
         {
             Death();
         }
-
-        if (!hasFood) 
+        else if (!dead)
         {
-            if (targetFood == null)
+            if (!hasFood) 
             {
-                LookForFood();
+                if (targetFood == null)
+                {
+                    LookForFood();
+                }
+                else
+                {
+                    PickUpFood();
+                }
             }
             else
             {
-                PickUpFood();
+                ReturnHome();
             }
-        }
-        else
-        {
-            ReturnHome();
-        }
 
-        if (changeDirectionTimer <= 0)
-        {
-            RandomDirection();
-        }
+            if (changeDirectionTimer <= 0)
+            {
+                RandomDirection();
+            }
 
-        // Move the ant
-        rb.transform.Translate(targetDirection * moveSpeed * Time.deltaTime, Space.World);
-        Rotate();
+            // Move the ant
+            rb.transform.Translate(targetDirection * moveSpeed * Time.deltaTime, Space.World);
+            Rotate();
+        }
     }
 
     private void LookForFood() 
@@ -122,7 +132,7 @@ public class AntController : MonoBehaviour
                if (position != Vector3.zero)
                {
                       targetDirection = (position - transform.position).normalized;
-                      changeDirectionTimer = Random.Range(0.5f, 2.0f);
+                      changeDirectionTimer = Random.Range(1.5f, 3.0f);
                }
        }
     }
@@ -183,7 +193,7 @@ public class AntController : MonoBehaviour
                     if (antSpawner == anthill)
                     {
                         targetDirection = (homeCollider.transform.position - transform.position).normalized;
-                        changeDirectionTimer = Random.Range(3.0f, 6.0f);
+                        changeDirectionTimer = 15f;
                         
                         break;
                     }
@@ -192,10 +202,26 @@ public class AntController : MonoBehaviour
         }
     }
 
-    // TODO: Handle ants' death
     private void Death() 
     {
-        // Debug.Log("Time finished");
+        this.dead = true;
+        if (hasFood)
+        {
+            Destroy(food);
+        }
+
+        this.foodPheromone.Stop();
+        this.homePheromone.Stop();
+
+        anthill.RemoveAnt();
+        animator.SetBool("Death", true); 
+        
+        Invoke("DestroyAnt", 30f);
+    }
+
+    private void DestroyAnt()
+    {
+        Destroy(gameObject);
     }
 
     private void DropOffFood()
@@ -218,7 +244,7 @@ public class AntController : MonoBehaviour
         targetDirection.Normalize();
     
         // Reset the timer for the next direction change
-        changeDirectionTimer = Random.Range(2.0f, 5.0f);
+        changeDirectionTimer = Random.Range(3.0f, 6.0f);
 
         targetFood = null;
     }
@@ -240,8 +266,18 @@ public class AntController : MonoBehaviour
 
     private void ActivatePheromoneSystem()
     {
-        foodPheromone.gameObject.SetActive(true);
-        homePheromone.gameObject.SetActive(true);
+        this.SetPheromoneSystem(true);
+    }
+
+    private void DisactivatePheromoneSystem()
+    {
+        this.SetPheromoneSystem(false);
+    }
+
+    private void SetPheromoneSystem(bool isActive)
+    {
+        foodPheromone.gameObject.SetActive(isActive);
+        homePheromone.gameObject.SetActive(isActive);
     }
 
     private void UpdatePheromoneSystem()
