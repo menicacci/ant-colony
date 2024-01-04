@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/_TerrainAutoUpgrade/layer_Cliff_1_DiffuseCliff_1_Normaleda51f90c7f37482.terrainlayer.meta
+guid: fcdea3052fd7d4b3184d46253e173327
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+========
+guid: 2fcbf08ce943ad9459882e5b6f2b6493
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+>>>>>>>> 39905edb238bcb702435bca779f14c9dc8fb8392:Assets/Animations/AntAnimator.controller.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

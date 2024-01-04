@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/_TerrainAutoUpgrade/layer_Dirt_2_DiffuseDirt_2_Normal2023054508611406.terrainlayer.meta
+guid: 84e237f1af9f34c6ea7983c0adb61e5f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+========
+guid: 7b7d0a06c95ae134a8b596036e4a80bb
+timeCreated: 1532450305
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+>>>>>>>> 39905edb238bcb702435bca779f14c9dc8fb8392:Assets/Content/TexturesPart01/Materials/grass02.mat.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,8 +1,17 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/_TerrainAutoUpgrade/layer_Cliff_2_DiffuseCliff_2_Normaleda51f90c7f37482.terrainlayer.meta
 guid: 8eabc7fb84c104669b7f5a5b16389f04
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 8574412962073106934
+========
+guid: c1cae046fc1890a40bc176b013827536
+timeCreated: 1532450299
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+>>>>>>>> 39905edb238bcb702435bca779f14c9dc8fb8392:Assets/Content/TexturesPart01/Materials/brick_broken_01.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

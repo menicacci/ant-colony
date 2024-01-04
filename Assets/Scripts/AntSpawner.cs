@@ -5,10 +5,12 @@ using UnityEngine;
 public class AntSpawner : MonoBehaviour
 {
     public GameObject antPrefab;
-    public int numberOfAnts = 100;
+    public int initialAnts = 100;
     public float spawnInterval = 1.0f;
+    public int foodSpawnRatio = 3;
 
     public int foodFound = 0;
+    public int numberOfAnts = 0;
 
     private void Start() 
     {
@@ -17,10 +19,10 @@ public class AntSpawner : MonoBehaviour
 
     private void SpawnAnts()
     {
-        if (numberOfAnts > 0)
+        if (initialAnts > 0)
         {
             SpawnAnt();
-            numberOfAnts--;
+            initialAnts--;
         }
         else
         {
@@ -32,7 +34,7 @@ public class AntSpawner : MonoBehaviour
     public void IncrementFood()
     {
         foodFound++;
-        if (foodFound % 10 == 0)
+        if (foodFound % this.foodSpawnRatio == 0)
         {
             SpawnAnt();
         }
@@ -47,4 +49,13 @@ public class AntSpawner : MonoBehaviour
         ant.Initialize(this);
     }
 
+    public void AddAnt()
+    {
+        this.numberOfAnts++;
+    }
+
+    public void RemoveAnt()
+    {
+        this.numberOfAnts--;
+    }
 }
