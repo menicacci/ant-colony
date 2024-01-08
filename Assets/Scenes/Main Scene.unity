@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.007843138, g: 0.007843138, b: 0.007843138, a: 1}
+  m_Color: {r: 0.041651815, g: 0.9811321, b: 0.13636602, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -333,7 +333,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 9
+    m_FontSize: 11
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 122620416}
   - component: {fileID: 122620415}
   - component: {fileID: 122620414}
+  - component: {fileID: 122620418}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -456,6 +457,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &122620418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122620413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec4fdf51eb9d4ddbb594e2387be661d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - {fileID: 581824838}
+  - {fileID: 349015315}
+  - {fileID: 1787397724}
+  - {fileID: 307508230}
+  - {fileID: 78388919}
+  - {fileID: 1905742724}
+  populations: 000000000000000000000000
+  foodFound: 000000000000000000000000
 --- !u!1001 &130034253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -686,17 +708,33 @@ PrefabInstance:
       propertyPath: cont
       value: 
       objectReference: {fileID: 1121559050}
+    - target: {fileID: 2813021298891676512, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: anthill
+      value: 
+      objectReference: {fileID: 1380327561}
+    - target: {fileID: 2813021298891676512, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: antSpawner
+      value: 
+      objectReference: {fileID: 1271780299}
     - target: {fileID: 3789620027810195406, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: m_Name
       value: FoodChartC
       objectReference: {fileID: 0}
     - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: widthRatio
-      value: 928
+      value: 528
       objectReference: {fileID: 0}
     - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: heightRatio
       value: 785
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: horizontalScrolling
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: Data.horizontalViewSize
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: Data.mSerializedData.Array.data[0].Material
@@ -788,7 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7264575171992994047, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7264575171992994047, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -883,7 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 1, b: 0.21960786, a: 1}
+  m_Color: {r: 0.009433985, g: 0.0069864886, b: 0.0069864886, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -892,10 +930,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 9
+    m_FontSize: 11
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 9
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -903,7 +941,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Food count:'
+  m_Text: 'Food found:'
 --- !u!222 &307508231
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -963,7 +1001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.039215688, g: 0.9607844, b: 0.027450982, a: 1}
+  m_Color: {r: 0.009433985, g: 0.0069864886, b: 0.0069864886, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -972,7 +1010,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 9
+    m_FontSize: 11
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -983,7 +1021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Food count:'
+  m_Text: 'Food found:'
 --- !u!222 &349015316
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1573,7 +1611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.007843138, g: 0.007843138, b: 0.007843138, a: 1}
+  m_Color: {r: 0.34069067, g: 0.36027056, b: 0.8301887, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1582,7 +1620,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 9
+    m_FontSize: 11
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1593,7 +1631,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Population A:'
+  m_Text: 'Population A: '
 --- !u!222 &581824839
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1866,6 +1904,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.09999999, y: 300, z: 900.09985}
   m_Center: {x: 0, y: 0, z: 149.99992}
+--- !u!114 &725244922 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+  m_PrefabInstance: {fileID: 1020761693}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc4b97fa0f3f2c48bd3f60d860d2cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &734690049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1875,6 +1924,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2813021298891676512, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: cont
+      value: 
+      objectReference: {fileID: 1121559050}
+    - target: {fileID: 2813021298891676512, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: anthill
+      value: 
+      objectReference: {fileID: 1251596947}
+    - target: {fileID: 2813021298891676512, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: antSpawner
       value: 
       objectReference: {fileID: 1121559050}
     - target: {fileID: 3789620027810195406, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
@@ -1887,7 +1944,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: heightRatio
-      value: 779
+      value: 785
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: horizontalScrolling
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: Data.horizontalViewSize
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: Data.mSerializedData.Array.data[0].Material
@@ -2662,6 +2727,10 @@ PrefabInstance:
       propertyPath: foodSpawnRatio
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: populationScore
+      value: 
+      objectReference: {fileID: 122620418}
     - target: {fileID: 1667340653171897228, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: antPrefab
       value: 
@@ -2732,6 +2801,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: anthillIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: numberOfAnts
       value: 0
       objectReference: {fileID: 0}
@@ -2743,6 +2816,10 @@ PrefabInstance:
       propertyPath: foodSpawnRatio
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: populationScore
+      value: 
+      objectReference: {fileID: 122620418}
     - target: {fileID: 1667340653171897228, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: antPrefab
       value: 
@@ -2910,6 +2987,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 300, z: 1000.1}
   m_Center: {x: 0, y: 0, z: 200}
+--- !u!1 &1251596947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000013722183174, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+  m_PrefabInstance: {fileID: 1600503247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1271780299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+  m_PrefabInstance: {fileID: 1600503247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc4b97fa0f3f2c48bd3f60d860d2cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1286139331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 665178239287760054, guid: 9f322861920582a4b8bfe9cde18ad7d3, type: 3}
@@ -2919,6 +3012,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 665178239287760054, guid: 9f322861920582a4b8bfe9cde18ad7d3, type: 3}
   m_PrefabInstance: {fileID: 1942439164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1349993626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000013722183174, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+  m_PrefabInstance: {fileID: 1020761693}
   m_PrefabAsset: {fileID: 0}
 --- !u!850595691 &1352764127
 LightingSettings:
@@ -2982,6 +3080,11 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
   m_PVRTiledBaking: 0
+--- !u!1 &1380327561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000013722183174, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+  m_PrefabInstance: {fileID: 1002525423}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1420902969
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,6 +3222,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: anthillIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: numberOfAnts
       value: 0
       objectReference: {fileID: 0}
@@ -3130,6 +3237,10 @@ PrefabInstance:
       propertyPath: foodSpawnRatio
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 956592131020541359, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
+      propertyPath: populationScore
+      value: 
+      objectReference: {fileID: 122620418}
     - target: {fileID: 1667340653171897228, guid: d347b7faef9c731449251f33c2d9134c, type: 3}
       propertyPath: antPrefab
       value: 
@@ -3276,7 +3387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.007843138, g: 0.007843138, b: 0.007843138, a: 1}
+  m_Color: {r: 0.9294118, g: 0.11764707, b: 0.1254902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3285,10 +3396,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 9
+    m_FontSize: 11
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 8
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -3421,7 +3532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.039215688, g: 0.9607844, b: 0.027450982, a: 1}
+  m_Color: {r: 0.009433985, g: 0.0069864886, b: 0.0069864886, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3430,7 +3541,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 9
+    m_FontSize: 11
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -3441,7 +3552,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Food count:'
+  m_Text: 'Food found:'
 --- !u!222 &1905742725
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3890,6 +4001,14 @@ PrefabInstance:
       propertyPath: cont
       value: 
       objectReference: {fileID: 1121559050}
+    - target: {fileID: 2813021298891676512, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: anthill
+      value: 
+      objectReference: {fileID: 1349993626}
+    - target: {fileID: 2813021298891676512, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: antSpawner
+      value: 
+      objectReference: {fileID: 725244922}
     - target: {fileID: 3789620027810195406, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: m_Name
       value: FoodChartB
@@ -3900,7 +4019,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: heightRatio
-      value: 779
+      value: 785
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: horizontalScrolling
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
+      propertyPath: Data.horizontalViewSize
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4852823210445144746, guid: 34f97427cbf864ef09ece18436ccdc08, type: 3}
       propertyPath: Data.mSerializedData.Array.data[0].Material

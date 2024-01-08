@@ -12,9 +12,22 @@ public class AntSpawner : MonoBehaviour
     public int foodFound = 0;
     public int numberOfAnts = 0;
 
+    public int anthillIndex;
+    public PopulationScore populationScore;
+
     private void Start() 
     {
         InvokeRepeating("SpawnAnts", 0f, spawnInterval);
+    }
+
+    public int GetNumberOfAnts()
+    {
+        return this.numberOfAnts;
+    }
+
+    public int GetFoodFound()
+    {
+        return this.foodFound;
     }
 
     private void SpawnAnts()
@@ -34,6 +47,7 @@ public class AntSpawner : MonoBehaviour
     public void IncrementFood()
     {
         foodFound++;
+        this.populationScore.ChangeFoodFound(foodFound, this.anthillIndex);
         if (foodFound % this.foodSpawnRatio == 0)
         {
             SpawnAnt();
@@ -52,10 +66,13 @@ public class AntSpawner : MonoBehaviour
     public void AddAnt()
     {
         this.numberOfAnts++;
+        this.populationScore.ChangePopulation(numberOfAnts, this.anthillIndex);
     }
 
     public void RemoveAnt()
     {
         this.numberOfAnts--;
+        this.populationScore.ChangePopulation(numberOfAnts, this.anthillIndex);
+
     }
 }
