@@ -106,7 +106,7 @@ public class AntController : MonoBehaviour
         {
             targetFood = targetedFood[Random.Range(0, targetedFood.Length)].transform;
             targetDirection = (targetFood.position - transform.position).normalized;
-            changeDirectionTimer = Random.Range(6.5f, 7.5f);
+            changeDirectionTimer = Random.Range(9f, 12f);
         }
         else
         {

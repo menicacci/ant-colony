@@ -281,7 +281,7 @@ MonoBehaviour:
   collisionRadius: 0.8
   perceptionRadius: 120
   foodRadius: 2
-  antLifetime: 90
+  antLifetime: 100
 --- !u!1 &1086531069829984439
 GameObject:
   m_ObjectHideFlags: 0
