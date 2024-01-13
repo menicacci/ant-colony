@@ -34,6 +34,7 @@ public class AntController : MonoBehaviour
     private float timer = 0f;
     private float changeDirectionTimer;
     public float antLifetime = 90f;
+    private float foodAward = 0f;
 
     private AntSpawner anthill;
     private Animator animator;
@@ -51,7 +52,9 @@ public class AntController : MonoBehaviour
         ActivatePheromoneSystem();
         UpdatePheromoneSystem();
         changeDirectionTimer = Random.Range(0.0f, 0.5f);
-        antLifetime += Random.Range(0f, 30f);
+
+        this.foodAward = this.antLifetime/2;
+        antLifetime += Random.Range(0f, this.antLifetime/2);
 
         animator = GetComponent<Animator>();
     }
@@ -235,6 +238,9 @@ public class AntController : MonoBehaviour
 
         UpdatePheromoneSystem();
         LookForFood();
+
+        // Increment lifetime
+        this.antLifetime += this.foodAward;
     }
 
     private void RandomDirection()
