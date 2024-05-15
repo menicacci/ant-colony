@@ -1,6 +1,5 @@
 # Ant Colony Simulation 
 
-### Simple ant simulation project developed using Unity Engine
 In this simulation, there are three ant colonies. Their goal is to collect and bring home as much food as possible.
 
 The colonies compete with each other in the search for food sources. Each food source has a finite amount of resources, and when depleted, the ants must find new ones.
